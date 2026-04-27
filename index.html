@@ -18,6 +18,26 @@
       }
     })();
   </script>
+  <script>
+    // Restore the original client-side route after a GitHub Pages 404 fallback.
+    (function (location) {
+      if (location.search && location.search[1] === '/') {
+        var decoded = location.search
+          .slice(1)
+          .split('&')
+          .map(function (segment) {
+            return segment.replace(/~and~/g, '&');
+          })
+          .join('?');
+
+        window.history.replaceState(
+          null,
+          '',
+          location.pathname.slice(0, -1) + decoded + location.hash
+        );
+      }
+    })(window.location);
+  </script>
   <script type="module" crossorigin src="/portfolio/assets/index-CFoZqjX6.js"></script>
   <link rel="modulepreload" crossorigin href="/portfolio/assets/vendor-react-C3urONmb.js">
   <link rel="modulepreload" crossorigin href="/portfolio/assets/vendor-gsap-C0eCJjti.js">
